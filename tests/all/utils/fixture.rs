@@ -79,6 +79,13 @@ impl Fixture {
         )
     }
 
+    pub fn webdriver(&self) -> &Self {
+        self.file(
+            "webdriver.json",
+            r#"{"moz:firefoxOptions": {"log": {"level": "trace"}}}"#,
+        )
+    }
+
     /// Add `WTFPL LICENSE` file to the fixture.
     pub fn wtfpl_license(&self) -> &Self {
         self.file(
@@ -144,10 +151,10 @@ impl Fixture {
                     # bindgen downloaded is what we expect, and if `=` is
                     # removed then it will download whatever the newest version
                     # of wasm-bindgen is which may not be what's listed here.
-                    wasm-bindgen = "=0.2.74"
+                    wasm-bindgen = "=0.2.92"
 
                     [dev-dependencies]
-                    wasm-bindgen-test = "0.3"
+                    wasm-bindgen-test = "=0.3.42"
                 "#,
                 name
             ),
@@ -222,7 +229,7 @@ impl Fixture {
 
         static INSTALL_WASM_BINDGEN: Once = Once::new();
         let cache = self.cache();
-        let version = "0.2.74";
+        let version = "0.2.92";
 
         let download = || {
             if let Ok(download) =
@@ -513,6 +520,7 @@ pub fn wbg_test_browser() -> Fixture {
     let fixture = Fixture::new();
     fixture
         .readme()
+        .webdriver()
         .cargo_toml("wbg-test-browser")
         .hello_world_src_lib()
         .file(
