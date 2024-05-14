@@ -147,7 +147,7 @@ impl Fixture {
                     wasm-bindgen = "=0.2.92"
 
                     [dev-dependencies]
-                    wasm-bindgen-test = "0.3"
+                    wasm-bindgen-test = "=0.3.42"
                 "#,
                 name
             ),

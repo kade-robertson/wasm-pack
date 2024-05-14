@@ -17,7 +17,7 @@ fn it_gets_wasm_bindgen_test_version() {
     fixture.cargo_check();
     let data = CrateData::new(&fixture.path, None).unwrap();
     let lock = Lockfile::new(&data).unwrap();
-    assert_eq!(lock.wasm_bindgen_test_version(), Some("0.3.24"),);
+    assert_eq!(lock.wasm_bindgen_test_version(), Some("0.3.42"),);
 }
 
 #[test]
