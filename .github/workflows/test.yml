@@ -21,7 +21,7 @@ jobs:
             os: ubuntu-latest
             rust: stable
           - build: macos-stable
-            os: macos-13
+            os: macos-latest
             rust: stable
           - build: windows-stable
             os: windows-latest
@@ -49,6 +49,11 @@ jobs:
             ~/.cargo/registry/cache
             target
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('Cargo.lock') }}
+
+      - name: Configure webdriver
+        if: matrix.os == 'macos-latest'
+        run: |
+          echo '{"moz:firefoxOptions": {"log": {"level": "trace"}}}' > webdriver.json
 
       - name: Run Tests
         run: cargo test --all --locked
