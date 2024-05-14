@@ -79,6 +79,13 @@ impl Fixture {
         )
     }
 
+    pub fn webdriver(&self) -> &Self {
+        self.file(
+            "webdriver.json",
+            r#"{"moz:firefoxOptions": {"log": {"level": "trace"}}}"#,
+        )
+    }
+
     /// Add `WTFPL LICENSE` file to the fixture.
     pub fn wtfpl_license(&self) -> &Self {
         self.file(
@@ -513,6 +520,7 @@ pub fn wbg_test_browser() -> Fixture {
     let fixture = Fixture::new();
     fixture
         .readme()
+        .webdriver()
         .cargo_toml("wbg-test-browser")
         .hello_world_src_lib()
         .file(
